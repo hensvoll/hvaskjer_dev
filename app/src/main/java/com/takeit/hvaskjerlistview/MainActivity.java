@@ -2,13 +2,19 @@ package com.takeit.hvaskjerlistview;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -18,7 +24,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private Connection connnection;
     private Statement statement;
     private ResultSet resultSet;
@@ -27,11 +33,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //setSupportActionBar(myToolbar);
+        //myToolbar.setSubtitle("Hva Skjer på Nesodden");
+        //myToolbar.setBackgroundColor(Color.CYAN);
+        //TextView toolText = findViewById(R.id.textView_toolbar);
+        //myToolbar.addView(toolText);
 
         ArrayList<HvaSkjer> hvaSkjerArray = HvaSkjerArray.getHvaSkerArrayList();
-
-
-
         ListView listView = (ListView)findViewById(R.id.listView_id);
         HvaSkjerAdapter adapter = new HvaSkjerAdapter(this, R.layout.adapter_view_layout, hvaSkjerArray);
         listView.setAdapter(adapter);
@@ -43,10 +52,28 @@ public class MainActivity extends Activity {
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return true;
+    }
    /* @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         Log.d("listView2", "listView:" + listView +
                 ", view:" + view.getClass() +
                 ", position:" + position );
     }*/
+
+   @Override
+   public boolean onOptionsItemSelected(MenuItem item){
+       /*switch (item.getItemId()) {
+           case R.id.action_1:
+                // do something
+               return true;
+           case R.id.action_2:
+                // do something else
+       }*/
+           return true;
+
+   }
 }
