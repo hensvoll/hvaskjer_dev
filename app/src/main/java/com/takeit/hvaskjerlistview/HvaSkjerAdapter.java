@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HvaSkjerAdapter extends ArrayAdapter<HvaSkjer> {
     private Context mContext;
@@ -33,13 +32,13 @@ public class HvaSkjerAdapter extends ArrayAdapter<HvaSkjer> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mRescource,parent,false);
 
-        TextView dateTextView = (TextView)convertView.findViewById(R.id.textView_dato_id);
-        TextView timeTextView = (TextView)convertView.findViewById(R.id.textView_kl_id);
-        TextView placeTextView = (TextView)convertView.findViewById(R.id.textView_sted_id);
-        TextView titleTextView = (TextView)convertView.findViewById(R.id.textView_tittel_id);
+        TextView dateTextView = (TextView)convertView.findViewById(R.id.textView_place_id);
+        //TextView timeTextView = (TextView)convertView.findViewById(R.id.textView_kl_id);
+        TextView placeTextView = (TextView)convertView.findViewById(R.id.textView_event_date_id);
+        TextView titleTextView = (TextView)convertView.findViewById(R.id.textView_event_tittel_id);
 
         dateTextView.setText(date);
-        timeTextView.setText(time);
+        //timeTextView.setText(time);
         placeTextView.setText(place);
         titleTextView.setText(title);
         return convertView;

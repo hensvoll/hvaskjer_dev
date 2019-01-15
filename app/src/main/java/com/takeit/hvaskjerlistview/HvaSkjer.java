@@ -7,12 +7,22 @@ public class HvaSkjer {
     private String time;
     private String title;
     private String place;
+    private  String description;
 
-    public HvaSkjer(String date, String time, String title, String place) {
+    public HvaSkjer(String date, String time, String title, String place, String description) {
         this.date = date;
         this.time = time;
         this.title = title;
         this.place = place;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDate() {

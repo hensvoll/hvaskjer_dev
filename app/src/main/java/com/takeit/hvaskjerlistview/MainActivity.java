@@ -2,6 +2,7 @@ package com.takeit.hvaskjerlistview;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //TextView toolText = findViewById(R.id.textView_toolbar);
         //myToolbar.addView(toolText);
 
-        ArrayList<HvaSkjer> hvaSkjerArray = HvaSkjerArray.getHvaSkerArrayList();
+        final ArrayList<HvaSkjer> hvaSkjerArray = HvaSkjerArray.getHvaSkerArrayList();
         ListView listView = (ListView)findViewById(R.id.listView_id);
         HvaSkjerAdapter adapter = new HvaSkjerAdapter(this, R.layout.adapter_view_layout, hvaSkjerArray);
         listView.setAdapter(adapter);
@@ -48,9 +49,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(null,"Da skjerdet...", Toast.LENGTH_LONG).show();
-                Log.d("listView2", "listView:" + ", view:" + view.getClass() + ", position:" + position );
+                String sted = hvaSkjerArray.get(position).getPlace();
+                String title = hvaSkjerArray.get(position).getTitle();
+                String date = hvaSkjerArray.get(position).getDate();
+                String description = hvaSkjerArray.get(position).getDescription();
+                //Log.d("listView2", "listView:" + ", view:" + view.getClass() + ", position:" + position );
+                Log.d("listView2", "sted: " + sted + " dato: " + date + " tittel: " + title + ", position:" + position );
+                Bundle bundle = new Bundle();
+                bundle.putString(GlobalConstant.BUNDLE_PLACE,sted);
+                bundle.putString(GlobalConstant.BUNDLE_TITLE,title);
+                bundle.putString(GlobalConstant.BUNDLE_DATE,date);
+                bundle.putString(GlobalConstant.BUNDLE_DESCRIPTION,description);
+                startEventActivity(bundle);
             }
         });
+    }
+
+    private void startEventActivity(Bundle bundle) {
+        Intent intent = new Intent(this, EventActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
